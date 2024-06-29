@@ -1,0 +1,24 @@
+* {
+  font-family: "Montserrat", sans-serif;
+  transition: background .3s;
+}
+
+#root {
+  height: 100vh;
+  max-width: inherit;
+  padding: 0;
+  text-align: center;
+  overflow: hidden;
+}
+
+body{
+  margin: 0;
+  box-sizing: border-box;
+  height: 100vh;
+}
+::selection {
+  background-color: #e0bf46;
+}
+.hiddenCanvasElement {
+  display: none;
+}
