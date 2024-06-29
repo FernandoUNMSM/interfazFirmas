@@ -14,7 +14,7 @@ export interface ILienzoSlice {
 	updateSizeLienzo: (size: string) => void;
 	updateZoomLienzo: (newZoom: number) => void;
 	updateRefLienzo: (newRef: RefObject<HTMLDivElement> | null) => void;
-	updatePdfLienzo: (newPdf: File) => void;
+	updatePdfLienzo: (newPdf: File | string) => void;
 	removePdfLienzo: () => void;
 	updatePdfNumberPage: (newNumberPage: number) => void;
 }
