@@ -11,10 +11,13 @@ const animation = keyframes`
   }
 `;
 export const DraggableContainer = styled.div<{ conf: IFirma }>`
-	z-index: 10000;
+	z-index: 1000;
 	cursor: pointer;
 	&:hover > .draggableItemControl {
 		display: block;
+	}
+	&:hover {
+		z-index: 10000;
 	}
 `;
 
@@ -55,7 +58,6 @@ export const DraggableItemControl = styled.div<{ conf: IFirma }>`
 	color: ${(props) => props.theme.textColor.primary};
 	display: none;
 	padding: 5px 8px;
-	z-index: 100000;
 	.numberOfSign {
 		font-size: 1.5em;
 		border-bottom: 1px solid rgba(139, 139, 139, 0.76);

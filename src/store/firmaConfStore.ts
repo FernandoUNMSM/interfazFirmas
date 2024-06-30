@@ -32,8 +32,8 @@ export const useFirmaStore: StateCreator<IFirmasConfSlice> = (set, get) => ({
 	firmaConf: [],
 	globalDimensions: true,
 	imageGlobal: '',
-	widthGlobal: 140,
-	heightGlobal: 140,
+	widthGlobal: 70,
+	heightGlobal: 50,
 	blocked: false,
 	updateBlocked: (status: boolean, id: number) => {
 		set({

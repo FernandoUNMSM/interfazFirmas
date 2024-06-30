@@ -7,6 +7,7 @@ export const ToastContainerStyled = styled.div`
     background-color: ${(props) => props.theme.background.secondary};
     color: ${(props) => props.theme.textColor.primary};
     font-size: 15px;
+    z-index: 1000;
     svg {
       color: ${(props) => props.theme.textColor.primary};
     }
