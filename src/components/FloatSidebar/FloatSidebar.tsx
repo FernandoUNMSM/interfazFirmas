@@ -7,9 +7,11 @@ import { TbZoomScan } from 'react-icons/tb';
 import { RiFileCloseLine } from 'react-icons/ri';
 import { ExportButton } from '../ExportButton/ExportButton';
 import { InputFilePDF } from '../FormComponents/InputFilePDF';
+import { IoGridOutline } from "react-icons/io5";
+import { TbBoxAlignBottomLeftFilled, TbBoxAlignBottomRightFilled, TbBoxAlignTopLeftFilled, TbBoxAlignTopRightFilled } from "react-icons/tb";
 
 export const FloatSidebar = () => {
-	const { updateTheme, updateZoomLienzo, zoomLienzo, removePdfLienzo, pdfLienzo } = useBoundStore();
+	const { theme, originPosition, updateOriginPosition, updateTheme, updateZoomLienzo, zoomLienzo, removePdfLienzo, pdfLienzo } = useBoundStore();
 	return (
 		<FloatSidebarContainer>
 			<div className="optionsContainer">
@@ -17,10 +19,10 @@ export const FloatSidebar = () => {
 					<FaPalette />
 				</div>
 				<div className="optionContent">
-					<div className="option" onClick={() => updateTheme('light')}>
+					<div className={`option ${theme === 'light' ? "active" : ""}`} onClick={() => updateTheme('light')}>
 						<CiLight />
 					</div>
-					<div className="option" onClick={() => updateTheme('dark')}>
+					<div className={`option ${theme === 'dark' ? "active" : ""}`} onClick={() => updateTheme('dark')}>
 						<CiDark />
 					</div>
 				</div>
@@ -28,6 +30,25 @@ export const FloatSidebar = () => {
 			<div className="optionsContainer">
 				<div className="option principal">
 					<VscJson />
+				</div>
+			</div>
+			<div className="optionsContainer">
+				<div className="option principal">
+					<IoGridOutline />
+				</div>
+				<div className="optionContent">
+					<div className={`option ${originPosition === 'left-top' ? "active" : ""}`} onClick={() => updateOriginPosition('left-top')}>
+						<TbBoxAlignTopLeftFilled />
+					</div>
+					<div className={`option ${originPosition === 'left-bottom' ? "active" : ""}`} onClick={() => updateOriginPosition('left-bottom')}>
+						<TbBoxAlignBottomLeftFilled />
+					</div>
+					<div className="option">
+						<TbBoxAlignTopRightFilled   />
+					</div>
+					<div className="option">
+						<TbBoxAlignBottomRightFilled  />
+					</div>
 				</div>
 			</div>
 			<div className="optionsContainer">

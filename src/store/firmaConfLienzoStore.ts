@@ -1,11 +1,12 @@
 import { StateCreator } from 'zustand';
 import { IFirma, IFirmasConfSlice } from './firmaConfStore';
 import { ILienzoSlice } from './lienzoStore';
+import { calcSignPositions } from '../utilities/calcPositions';
 
 export interface IFirmaConfLienzoSlice {
 	updateWidth: (width: number, id: number) => void;
 	updateHeight: (newHeight: number, id: number) => void;
-	updatePosition: (newX: number, newY: number, id: number) => void;
+	updatePosition: (newX: number, newY: number, id: number, newXParsed?: number, newYParsed?: number) => void;
 	updateWidthGlobal: (width: number) => void;
 	updateHeightGlobal: (newHeight: number) => void;
 }
@@ -44,25 +45,18 @@ export const useFirmaConfLienzoStore: StateCreator<IFirmasConfSlice & ILienzoSli
 			firmaConf: get().firmaConf.map((conf: IFirma) => ({ ...conf, height: calculatedHeight })),
 		});
 	},
-	updatePosition: (newX: number, newY: number, id: number) => {
+	updatePosition: (newX: number, newY: number, id: number, newXParsed: number | null = null, newYParsed: number | null = null) => {
 		const firmaConfItem: IFirma | undefined = get().firmaConf.find((conf: IFirma) => conf.id === id);
 
 		if (!firmaConfItem) return;
-		const calculatedWidth = get().widthLienzo - firmaConfItem.width;
-		const calculatedHeight = get().heightLienzo - firmaConfItem.height;
 
-		let calculatedPosX: number = newX;
-		let calculatedPosY: number = newY;
+		const result = calcSignPositions(get(), firmaConfItem, newX, newY, newXParsed, newYParsed);
+		if (!result) return;
 
-		if (newX < 0) calculatedPosX = 0;
-		if (newY < 0) calculatedPosY = 0;
-
-		if (newX > calculatedWidth) calculatedPosX = calculatedWidth;
-		if (newY > calculatedHeight) calculatedPosY = calculatedHeight;
-
+		const {calculatedPosX, calculatedPosY, calculatedPosXParsed, calculatedPosYParsed} = result;
 
 		set({
-			firmaConf: get().firmaConf.map((conf: IFirma) => (conf.id === id ? { ...conf, position: { x: calculatedPosX, y: calculatedPosY } } : conf)),
+			firmaConf: get().firmaConf.map((conf: IFirma) => (conf.id === id ? { ...conf, position: { x: calculatedPosX, y: calculatedPosY }, positionParsed: {x: calculatedPosXParsed, y: calculatedPosYParsed} } : conf)),
 		});
 	},
 });

@@ -29,6 +29,7 @@ export const OverflowContainer = styled.div`
 `
 
 export const ScaleContainer = styled.div<{zoom: number}>`
+  overflow: hidden;
   height: auto;
   width: auto;
   zoom: ${(props) => props.zoom}%;

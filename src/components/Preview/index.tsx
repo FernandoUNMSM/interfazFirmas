@@ -37,7 +37,7 @@ export function Preview() {
 		<OverflowContainer>
 			<FloatSidebar />
 			<ScaleContainer zoom={zoomLienzo}>
-				<PreviewContainer>
+				<PreviewContainer className='preview-container'>
 					<DndContext onDragEnd={handleDragEnd} collisionDetection={rectIntersection}>
 						<Droppable>
 							{firmaConf.map((conf) => (

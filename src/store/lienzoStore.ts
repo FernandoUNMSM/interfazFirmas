@@ -1,7 +1,10 @@
 import { RefObject } from 'react';
 import { StateCreator } from 'zustand';
+import { reCalcSignPositions } from '../utilities/calcPositions';
+import { IFirmasConfSlice } from './firmaConfStore';
 
 export interface ILienzoSlice {
+  	originPosition: String;
 	widthLienzo: number;
 	heightLienzo: number;
 	sizeLienzo: string;
@@ -17,6 +20,7 @@ export interface ILienzoSlice {
 	updatePdfLienzo: (newPdf: File | string) => void;
 	removePdfLienzo: () => void;
 	updatePdfNumberPage: (newNumberPage: number) => void;
+  	updateOriginPosition: (newOriginPosition: String) => void;
 }
 
 interface ISize {
@@ -24,7 +28,8 @@ interface ISize {
 	heightLienzo: number;
 }
 
-export const useLienzoStore: StateCreator<ILienzoSlice> = (set, get) => ({
+export const useLienzoStore: StateCreator<ILienzoSlice & IFirmasConfSlice, [], [], ILienzoSlice> = (set, get) => ({
+	originPosition: 'left-top',
 	widthLienzo: 595,
 	heightLienzo: 842,
 	sizeLienzo: 'A4',
@@ -56,4 +61,9 @@ export const useLienzoStore: StateCreator<ILienzoSlice> = (set, get) => ({
 	updatePdfLienzo: (newPdf: File | string) => set({ pdfLienzo: newPdf }),
 	removePdfLienzo: () => set({ pdfLienzo: '' }),
 	updatePdfNumberPage: (newNumberPage: number) => set({ pdfNumberPage: newNumberPage }),
+	updateOriginPosition: (newOriginPosition: String) => {
+		set({ originPosition: newOriginPosition })
+
+		reCalcSignPositions(get());
+	}
 });

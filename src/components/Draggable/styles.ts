@@ -58,9 +58,16 @@ export const DraggableItemControl = styled.div<{ conf: IFirma }>`
 	color: ${(props) => props.theme.textColor.primary};
 	display: none;
 	padding: 5px 8px;
+
+	&.open-upwards {
+		top: auto;
+		bottom: 0; // abrir hacia arriba
+	}
+
 	.numberOfSign {
 		font-size: 1.5em;
 		border-bottom: 1px solid rgba(139, 139, 139, 0.76);
+		user-select: none;
 	}
 	.actionIcons {
 		display: flex;

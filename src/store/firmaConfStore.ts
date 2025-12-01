@@ -1,9 +1,7 @@
 import { StateCreator } from 'zustand';
-
-interface IPosition {
-	x: number;
-	y: number;
-}
+import { ILienzoSlice } from './lienzoStore';
+import { IPosition } from '../models/IPosition';
+import { calcInitialSignPosition } from '../utilities/calcPositions';
 
 export interface IFirma {
 	id: number;
@@ -12,6 +10,7 @@ export interface IFirma {
 	position: IPosition;
 	image: string;
 	blocked: boolean;
+	positionParsed: IPosition;
 }
 
 export interface IFirmasConfSlice {
@@ -28,7 +27,7 @@ export interface IFirmasConfSlice {
 	handleGlobalDimensions: (status: boolean) => void;
 }
 
-export const useFirmaStore: StateCreator<IFirmasConfSlice> = (set, get) => ({
+export const useFirmaStore: StateCreator<IFirmasConfSlice & ILienzoSlice, [], [], IFirmasConfSlice> = (set, get) => ({
 	firmaConf: [],
 	globalDimensions: true,
 	imageGlobal: '',
@@ -60,7 +59,8 @@ export const useFirmaStore: StateCreator<IFirmasConfSlice> = (set, get) => ({
 			height: get().heightGlobal,
 			blocked: false,
 			image: get().imageGlobal,
-			position: {
+			position: calcInitialSignPosition(get()),
+			positionParsed: {
 				x: 0,
 				y: 0,
 			},

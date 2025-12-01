@@ -18,15 +18,15 @@ export const FirmaConfItem = ({ conf, index }: Props) => {
 			<InputsContainer>
 				<InputSimple
 					letter="X"
-					value={conf.position.x}
+					value={conf.positionParsed.x}
 					disabled={conf.blocked}
-					onChange={(e: ChangeEvent<HTMLInputElement>) => updatePosition(Number(e.target.value), conf.position.y, conf.id)}
+					onChange={(e: ChangeEvent<HTMLInputElement>) => updatePosition(Number(e.target.value), conf.position.y, conf.id, Number(e.target.value), conf.positionParsed.y)}
 				/>
 				<InputSimple
 					letter="Y"
-					value={conf.position.y}
+					value={conf.positionParsed.y}
 					disabled={conf.blocked}
-					onChange={(e: ChangeEvent<HTMLInputElement>) => updatePosition(conf.position.x, Number(e.target.value), conf.id)}
+					onChange={(e: ChangeEvent<HTMLInputElement>) => updatePosition(conf.position.x, Number(e.target.value), conf.id, conf.positionParsed.x, Number(e.target.value))}
 				/>
 				{!globalDimensions ? (
 					<>
